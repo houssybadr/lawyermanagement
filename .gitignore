@@ -1,0 +1,69 @@
+# Go related
+# Binaries for programs and plugins
+*.exe
+*.dll
+*.so
+*.dylib
+
+# Test binaries
+*.test
+
+# Output of the go coverage tool
+coverage.out
+*.out
+
+# Build directories
+/bin/
+/build/
+/dist/
+
+# Vendor directory
+/vendor/
+
+# Go workspace and package caches
+GOPATH/
+GOPATH/pkg/
+
+# IDEs and editors
+.vscode/
+.idea/
+*.iml
+*.sublime-project
+*.sublime-workspace
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Environment files (local secrets)
+.env
+.env.*
+*.env
+
+# Logs
+*.log
+
+# Database files
+*.db
+*.sqlite
+*.sqlite3
+
+# Node (if any)
+node_modules/
+
+# Misc
+*.swp
+*.tmp
+
+# Ignore any per-user or secret files under internal/webhooks (e.g., webhook envs)
+internal/webhooks/*.env
+
+# Docker: ignore local override files and secrets, but keep compose files tracked
+docker-compose.override.yml
+**/secrets/*.env
+
+# Optional: ignore test run artifacts
+coverage/
+reports/
+
+# End of file
