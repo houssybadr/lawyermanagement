@@ -3,11 +3,11 @@ package handlers
 import (
 	"net/http"
 	"strconv"
-	"test/internal/dto"
-	"test/internal/models"
-	"test/internal/repository"
-	"test/internal/utils"
-	"test/internal/webhooks"
+	"github.com/houssybadr/lawyermanagement/backend/internal/dto"
+	"github.com/houssybadr/lawyermanagement/backend/internal/models"
+	"github.com/houssybadr/lawyermanagement/backend/internal/repository"
+	"github.com/houssybadr/lawyermanagement/backend/internal/utils"
+	"github.com/houssybadr/lawyermanagement/backend/internal/webhooks"
 
 	"github.com/gin-gonic/gin"
 	"golang.org/x/crypto/bcrypt"

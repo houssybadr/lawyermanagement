@@ -1,8 +1,8 @@
 package routers
 
 import (
-	"test/internal/handlers"
-	"test/internal/repository"
+	"github.com/houssybadr/lawyermanagement/backend/internal/handlers"
+	"github.com/houssybadr/lawyermanagement/backend/internal/repository"
 	"github.com/gin-gonic/gin"
 	"gorm.io/gorm"
 )

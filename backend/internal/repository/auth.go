@@ -2,7 +2,7 @@ package repository
 
 import (
 	"gorm.io/gorm"
-	"test/internal/models"
+	"github.com/houssybadr/lawyermanagement/backend/internal/models"
 )
 
 type AuthRepository struct{

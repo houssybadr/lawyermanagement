@@ -1,7 +1,7 @@
 package dto
 
 import (
-	"test/internal/models"
+	"github.com/houssybadr/lawyermanagement/backend/internal/models"
 )
 
 type AdminSignupRequest struct{

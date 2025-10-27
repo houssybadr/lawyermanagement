@@ -3,7 +3,7 @@ package middlewares
 import (
 	"fmt"
 	"net/http"
-	"test/internal/utils"
+	"github.com/houssybadr/lawyermanagement/backend/internal/utils"
 
 	"github.com/gin-gonic/gin"
 	"github.com/golang-jwt/jwt/v5"

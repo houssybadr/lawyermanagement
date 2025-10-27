@@ -7,7 +7,7 @@ import (
 	"log"
 	"net/http"
 	"os"
-	"test/internal/models"
+	"github.com/houssybadr/lawyermanagement/backend/internal/models"
 	"time"
 
 	"github.com/joho/godotenv"

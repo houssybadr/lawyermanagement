@@ -1,4 +1,4 @@
-module test
+module github.com/houssybadr/lawyermanagement/backend
 
 go 1.25.1
 

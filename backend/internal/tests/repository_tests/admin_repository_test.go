@@ -2,9 +2,9 @@ package tests
 
 import (
 	//"fmt"
-	"test/internal/models"
-	"test/internal/repository"
-	"test/internal/tests/testutils"
+	"github.com/houssybadr/lawyermanagement/backend/internal/models"
+	"github.com/houssybadr/lawyermanagement/backend/internal/repository"
+	"github.com/houssybadr/lawyermanagement/backend/internal/tests/testutils"
 	"testing"
 )
 

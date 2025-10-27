@@ -1,8 +1,8 @@
 package main
 
 import (
-	"test/internal/database"
-	"test/internal/routers"
+	"github.com/houssybadr/lawyermanagement/backend/internal/database"
+	"github.com/houssybadr/lawyermanagement/backend/internal/routers"
 	"github.com/gin-gonic/gin"
 )
 

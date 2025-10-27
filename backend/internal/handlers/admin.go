@@ -3,8 +3,8 @@ package handlers
 import (
 	"net/http"
 	"strconv"
-	"test/internal/models"
-	"test/internal/repository"
+	"github.com/houssybadr/lawyermanagement/backend/internal/models"
+	"github.com/houssybadr/lawyermanagement/backend/internal/repository"
 
 	"github.com/gin-gonic/gin"
 	"gorm.io/gorm"

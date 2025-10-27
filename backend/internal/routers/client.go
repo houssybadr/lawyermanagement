@@ -1,10 +1,10 @@
 package routers
 
 import (
-	"test/internal/handlers"
-	"test/internal/middlewares"
-	"test/internal/models"
-	"test/internal/repository"
+	"github.com/houssybadr/lawyermanagement/backend/internal/handlers"
+	"github.com/houssybadr/lawyermanagement/backend/internal/middlewares"
+	"github.com/houssybadr/lawyermanagement/backend/internal/models"
+	"github.com/houssybadr/lawyermanagement/backend/internal/repository"
 
 	"github.com/gin-gonic/gin"
 	"gorm.io/gorm"

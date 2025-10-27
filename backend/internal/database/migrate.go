@@ -1,7 +1,7 @@
 package database
 import (
 	"gorm.io/gorm"
-	"test/internal/models"
+	"github.com/houssybadr/lawyermanagement/backend/internal/models"
 	"log"
 	"fmt"
 )

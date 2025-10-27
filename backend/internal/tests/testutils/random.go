@@ -4,7 +4,7 @@ import (
 	"math/rand"
 	"time"
 	"strconv"
-	"test/internal/models"
+	"github.com/houssybadr/lawyermanagement/backend/internal/models"
 )
 
 func generateRandomNom() string{

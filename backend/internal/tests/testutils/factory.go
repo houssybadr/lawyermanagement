@@ -1,8 +1,8 @@
 package testutils
 
 import (
-	"test/internal/models"
-	"test/internal/repository"
+	"github.com/houssybadr/lawyermanagement/backend/internal/models"
+	"github.com/houssybadr/lawyermanagement/backend/internal/repository"
 	"testing"
 
 	"gorm.io/gorm"

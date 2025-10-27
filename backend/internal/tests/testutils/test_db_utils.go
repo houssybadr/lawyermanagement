@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"log"
 	"os"
-	"test/internal/database"
+	"github.com/houssybadr/lawyermanagement/backend/internal/database"
 
 	"github.com/joho/godotenv"
 	"gorm.io/driver/postgres"

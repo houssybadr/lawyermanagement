@@ -1,7 +1,7 @@
 package repository
 
 import (
-	"test/internal/models"
+	"github.com/houssybadr/lawyermanagement/backend/internal/models"
 
 	"gorm.io/gorm"
 )
