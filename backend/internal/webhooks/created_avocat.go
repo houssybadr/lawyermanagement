@@ -10,11 +10,9 @@ import (
 	"github.com/houssybadr/lawyermanagement/backend/internal/models"
 	"time"
 
-	"github.com/joho/godotenv"
 )
 func CreatedAvocatN8nWebhook(avocat models.Avocat){
 
-	godotenv.Load("internal/webhooks/n8n_webhook.env")
 	webhookUrl:=os.Getenv("WEBHOOK_URL")
 	webhookSecret:=os.Getenv("WEBHOOK_SECRET")
 	if webhookUrl=="" || webhookSecret==""{

@@ -7,7 +7,7 @@ import (
 type Client struct {
 	Personne
 	Profession         string             `json:"profession"`
-	SituationJuridique SituationJuridique `gorm:"type:int;default:0" json:"situation_juridique" `
+	SituationJuridique SituationJuridique `gorm:"type:int;default:1" json:"situation_juridique" `
 	AvocatID           uint               `json:"avocat_id"`
 	Avocat             *Avocat            `gorm:"constraint:OnUpdate:CASCADE, OnDelete:SET NULL;" json:"-"`
 	Dossiers           []*Dossier         `gorm:"foreignKey:client_id" json:"dossiers"`

@@ -8,7 +8,7 @@ import (
 type TypeFichier int
 
 const(
-	PNG TypeFichier =iota
+	PNG TypeFichier =iota+1
 	JPG
 	PDF
 	DOCX

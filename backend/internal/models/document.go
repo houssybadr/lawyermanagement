@@ -8,7 +8,7 @@ type Document struct {
 	Contenu      []byte       `gorm:"type:bytea" json:"-"`
 	DateCreation time.Time    `json:"date_creation"`
 	TypeFichier  TypeFichier  `gorm:"type:int;not null" json:"type_fichier"`
-	TypeDocument TypeDocument `gorm:"type:int;default:0" json:"type_document"`
+	TypeDocument TypeDocument `gorm:"type:int;default:1" json:"type_document"`
 	DossierID    uint         `json:"dossier_id"`
 	Dossier      *Dossier     `gorm:"constraint:OnUpdate:CASCADE,OnDelete:CASCADE;" json:"-"`
 }

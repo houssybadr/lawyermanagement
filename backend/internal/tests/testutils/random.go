@@ -96,7 +96,7 @@ func GenerateRandomAvocat() models.Avocat{
 		Personne: generateRandomPersonne(),
 		Cabinet: "Cabinet "+generateRandomNom(),
 		NumeroBarreau: "NB"+strconv.Itoa(rand.Intn(9999)),
-		Specialite: models.SpecialiteAvocat(rand.Intn(6)),
+		Specialite: models.SpecialiteAvocat(rand.Intn(7-1)+1),
 
 	}
 }
@@ -104,7 +104,7 @@ func GenerateRandomAvocat() models.Avocat{
 func GenerateRandomClient() models.Client{
 	return models.Client{
 		Personne: generateRandomPersonne(),
-		SituationJuridique: models.SituationJuridique(rand.Intn(4)),
+		SituationJuridique: models.SituationJuridique(rand.Intn(5-1)+1),
 		Profession: generateRandomProfession(),
 	}
 }
@@ -121,8 +121,8 @@ func GenerateRandomDocument() models.Document{
 	return models.Document{
 		Nom:"Nom document"+strconv.Itoa(rand.Intn(300)),
 		DateCreation: time.Now().Add(time.Duration(rand.Intn(10000)) * time.Hour),
-		TypeFichier: models.TypeFichier(rand.Intn(6)),
-		TypeDocument: models.TypeDocument(rand.Intn(5)),
+		TypeFichier: models.TypeFichier(rand.Intn(7-1)+1),
+		TypeDocument: models.TypeDocument(rand.Intn(6-1)+1),
 		Contenu: generateRandomBytes(),
 	}
 }

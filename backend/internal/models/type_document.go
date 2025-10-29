@@ -5,7 +5,7 @@ import "encoding/json"
 type TypeDocument int
 
 const (
-	OTHER TypeDocument = iota
+	OTHER TypeDocument = iota+1
 	PREUVE
 	CONTRAT
 	FACTURE

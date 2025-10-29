@@ -1,0 +1,48 @@
+services:
+
+  go-backend:
+    container_name: go-backend
+    build:
+      context: ./backend/
+      dockerfile: dockerfile
+    ports:
+      - "3000:3000"
+    depends_on:
+      db:
+        condition: service_healthy
+    networks:
+      - lawyermanagement-netword
+    env_file:
+      - backend.env
+
+  db:
+    container_name: db
+    build:
+      dockerfile: ./dockerfile
+      context: ./database
+    env_file:
+      - db.env
+    healthcheck:
+      test: ["CMD-SHELL","pg_isready -U $POSTGRES_USER -d $POSTGRES_DB -h localhost -p 5432"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+    ports: 
+      - "5432:5432"
+    networks:
+      - lawyermanagement-netword
+  
+  testdb:
+    image: postgres:15
+    container_name: testdb
+    env_file:
+      - testdb.env
+    ports: 
+      - "4321:4321"
+    networks:
+      - lawyermanagement-netword
+    
+networks:
+  lawyermanagement-netword:
+    driver: bridge

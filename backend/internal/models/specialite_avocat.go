@@ -8,7 +8,7 @@ import (
 type SpecialiteAvocat int
 
 const (
-	Generaliste SpecialiteAvocat = iota
+	Generaliste SpecialiteAvocat = iota+1
 	DroitAffaires
 	DroitCivil
 	DroitTravail

@@ -1,0 +1,26 @@
+name: CI
+
+on: 
+    push:
+        branches: [main,test/ci]
+    pull_request:
+        branches: [test/ci]
+
+jobs:
+    test:
+        runs-on: ubuntu-latest
+        services:
+            db:
+                image: postgres:15
+                env:
+                    POSTGRES_USER: root
+                    POSTGRES_PASSWORD: root
+                    POSTGRES_DB: lawyer_management
+                    POSTGRES_PORT: 5432
+                ports: 
+                    - 5432:5432
+                options: >-
+                    --health-cmd "pg_isready -U root -d lawyer_management"
+                    --health-interval 5s
+                    --health-timeout 5s
+                    --health-retries 5

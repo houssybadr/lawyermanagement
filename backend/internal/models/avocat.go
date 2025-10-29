@@ -4,7 +4,7 @@ type Avocat struct {
 	Personne
 	Cabinet       string           `gorm:"type:varchar(100)" json:"cabinet"`
 	NumeroBarreau string           `gorm:"type:varchar(100)"  json:"numero_barreau"`
-	Specialite    SpecialiteAvocat `gorm:"type:int;default:0" json:"specialite" `
+	Specialite    SpecialiteAvocat `gorm:"type:int;default:1" json:"specialite" `
 	AdminID       uint             `json:"admin_id"`
 	Admin         *Admin           `gorm:"constraint:OnUpdate:CASCADE, OnDelete:SET NULL;" json:"-"`
 	Clients       []*Client        `gorm:"foreignKey:avocat_id" json:"clients"`

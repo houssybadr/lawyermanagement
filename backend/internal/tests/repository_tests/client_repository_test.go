@@ -2,10 +2,10 @@ package tests
 
 import (
 	"testing"
+
 	"github.com/houssybadr/lawyermanagement/backend/internal/models"
 	"github.com/houssybadr/lawyermanagement/backend/internal/repository"
 	"github.com/houssybadr/lawyermanagement/backend/internal/tests/testutils"
-
 	//"fmt"
 )
 
@@ -42,9 +42,9 @@ func TestFetchClientById(t *testing.T){
 	clientRepo.SetDB(tx)
 
 	// Act
-	clientToCreate:=testutils.CreateClient(t,tx,clientRepo)
+	createdClient:=testutils.CreateClient(t,tx,clientRepo)
 	var fetchedClient models.Client
-	if err:=clientRepo.GetById(&fetchedClient,clientToCreate.Id);err!=nil{
+	if err:=clientRepo.GetById(&fetchedClient,createdClient.Id);err!=nil{
 		t.Errorf("Failed to fetch created client %v",err)
 	}
 
@@ -52,8 +52,7 @@ func TestFetchClientById(t *testing.T){
 	if fetchedClient.IsEmpty(){
 		t.Errorf("Fetched client is Empty")
 	}
-
-	if !fetchedClient.IsEqual(clientToCreate){
+	if !fetchedClient.IsEqual(createdClient){
 		t.Errorf("Fetched client does not match created client")
 	}
 }
@@ -90,16 +89,17 @@ func TestUpdateClient(t *testing.T){
 	clientRepo.SetDB(tx)
 
 	//Act 
-	clientToCreate:=testutils.CreateClient(t,tx,clientRepo)
+	createdClient:=testutils.CreateClient(t,tx,clientRepo)
 	updatedClientData:=testutils.GenerateRandomClient()
-	updatedClientData.AvocatID=clientToCreate.AvocatID
-	if err:=clientRepo.Updates(updatedClientData,clientToCreate.Id);err!=nil{
+	updatedClientData.AvocatID=createdClient.AvocatID
+	if err:=clientRepo.Updates(updatedClientData,createdClient.Id);err!=nil{
 		t.Errorf("Failed to update client")
 	}
 
 	// Assert
 	var fetchedClient models.Client
-	if err:=clientRepo.GetById(&fetchedClient,clientToCreate.Id);err!=nil{
+
+	if err:=clientRepo.GetById(&fetchedClient,createdClient.Id);err!=nil{
 		t.Errorf("Failed to fetch updated client")
 	}
 

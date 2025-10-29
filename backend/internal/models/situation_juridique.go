@@ -6,7 +6,7 @@ type SituationJuridique int
 
 const (
 	// SituationAttente - Situation intermédiaire et provisoire
-	SituationAttente SituationJuridique = iota
+	SituationAttente SituationJuridique = iota+1
 	
 	// DroitSubjectif - Pouvoir reconnu à une personne par la loi
 	DroitSubjectif 

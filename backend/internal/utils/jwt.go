@@ -5,11 +5,9 @@ import (
 	"time"
 
 	"github.com/golang-jwt/jwt/v5"
-	"github.com/joho/godotenv"
 )
 
 func GetJwtSecret() string {
-	godotenv.Load(".secret.env")
 	return os.Getenv("JWT_SECRET")
 }
 
