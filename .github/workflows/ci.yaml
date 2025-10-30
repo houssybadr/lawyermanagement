@@ -60,7 +60,7 @@ jobs:
                 timeout=60
                 count=0
                 # Access the service via localhost:5432 from the runner host
-                until pg_isready -h ${{secrets.TEST_DB_USER}} -p ${{secrets.TEST_DB_PORT}}; do
+                until pg_isready -h 127.0.0.1 -p 5432; do
                 sleep 2
                 count=$((count+2))
                 if [ $count -ge $timeout ]; then
