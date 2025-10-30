@@ -13,10 +13,10 @@ jobs:
             db:
                 image: postgres:15
                 env:
-                    POSTGRES_USER: root
-                    POSTGRES_PASSWORD: root
-                    POSTGRES_DB: lawyer_management
-                    POSTGRES_PORT: 5432
+                    POSTGRES_USER: ${{secrets.TEST_DB_USER}}
+                    POSTGRES_PASSWORD: ${{secrets.TEST_DB_PASSWORD}}
+                    POSTGRES_DB: ${{secrets.TEST_DB_NAME}}
+                    POSTGRES_PORT: ${{secrets.TEST_DB_PORT}}
                 ports: 
                     - 5432:5432
                 options: >-
@@ -24,3 +24,40 @@ jobs:
                     --health-interval 5s
                     --health-timeout 5s
                     --health-retries 5
+        
+        env:
+            #jwt crypt key
+            JWT_SECRET: ${{secrets.JWT_SECRET}}
+
+            # for prod postgressdb
+            DB_HOST: ${{secrets.DB_HOST}}
+            DB_PORT: ${{secrets.DB_PORT}}
+            DB_USER: ${{secrets.DB_USER}}
+            DB_NAME: ${{secrets.DB_NAME}}
+            DB_PASSWORD: ${{secrets.DB_PASSWORD}}
+
+            # for test postgressdb
+            TEST_DB_HOST: ${{secrets.TEST_DB_HOST}}
+            TEST_DB_PORT: ${{secrets.TEST_DB_PORT}}
+            TEST_DB_USER: ${{secrets.TEST_DB_USER}}
+            TEST_DB_NAME: ${{secrets.TEST_DB_NAME}}
+            TEST_DB_PASSWORD: ${{secrets.TEST_DB_PASSWORD}}
+
+            # for n8n automations:
+            WEBHOOK_URL: ${{secrets.WEBHOOK_URL}}
+            WEBHOOK_SECRET: ${{secrets.WEBHOOK_SECRET}}
+
+        steps: 
+            - name: repository checkout
+              uses: actions/checkout@v4
+            
+            - name: Set up Go
+              uses: actions/setup-go@v5
+              with:
+                go-version: 1.25.1
+
+            - name: setup go
+              run: go mod download
+              
+            - name: run tests
+              run: go test -v ./internal/tests/...
