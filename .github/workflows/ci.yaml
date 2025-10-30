@@ -56,7 +56,14 @@ jobs:
               with:
                 go-version: 1.25.1
                 cache-dependency-path: backend/go.sum
-
+            
+            - name: Debug env vars
+              run: |
+                  echo "TEST_DB_HOST: $TEST_DB_HOST"
+                  echo "TEST_DB_PORT: $TEST_DB_PORT"
+                  echo "TEST_DB_USER: $TEST_DB_USER"
+                  echo "TEST_DB_NAME: $TEST_DB_NAME"
+                  echo "TEST_DB_PASSWORD: $TEST_DB_PASSWORD"
 
             - name: setup go
               working-directory: backend 
