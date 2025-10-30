@@ -38,8 +38,10 @@ jobs:
             DB_PASSWORD: ${{secrets.DB_PASSWORD}}
 
             # for test postgressdb
-            TEST_DB_HOST: ${{secrets.TEST_DB_HOST}}
-            TEST_DB_PORT: ${{secrets.TEST_DB_PORT}}
+            # IMPORTANT: In GitHub Actions, job steps run on the host, not inside the service network.
+            # So use localhost and the published port to reach the Postgres service.
+            TEST_DB_HOST: 127.0.0.1
+            TEST_DB_PORT: "5432"
             TEST_DB_USER: ${{secrets.TEST_DB_USER}}
             TEST_DB_NAME: ${{secrets.TEST_DB_NAME}}
             TEST_DB_PASSWORD: ${{secrets.TEST_DB_PASSWORD}}
@@ -62,7 +64,8 @@ jobs:
               run: |
                 timeout=60
                 count=0
-                until pg_isready -h testdb -U ${{secrets.TEST_DB_USER}} -d ${{secrets.TEST_DB_NAME}}; do
+                # Access the service via localhost:5432 from the runner host
+                until pg_isready -h 127.0.0.1 -p 5432; do
                 sleep 2
                 count=$((count+2))
                 if [ $count -ge $timeout ]; then
