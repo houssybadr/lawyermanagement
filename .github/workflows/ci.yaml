@@ -10,7 +10,7 @@ jobs:
     test:
         runs-on: ubuntu-latest
         services:
-            db:
+            testdb:
                 image: postgres:15
                 env:
                     POSTGRES_USER: ${{secrets.TEST_DB_USER}}
