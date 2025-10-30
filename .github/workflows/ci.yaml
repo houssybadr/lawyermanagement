@@ -13,10 +13,10 @@ jobs:
             testdb:
                 image: postgres:15
                 env:
-                    POSTGRES_USER: ${{secrets.TEST_DB_USER}}
-                    POSTGRES_PASSWORD: ${{secrets.TEST_DB_PASSWORD}}
-                    POSTGRES_DB: ${{secrets.TEST_DB_NAME}}
-                    POSTGRES_PORT: ${{secrets.TEST_DB_PORT}}
+                    POSTGRES_USER: root
+                    POSTGRES_PASSWORD: root
+                    POSTGRES_DB: lawyer_management
+                    POSTGRES_PORT: 5432
                 ports: 
                     - 5432:5432
                 options: >-
