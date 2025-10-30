@@ -66,16 +66,16 @@ jobs:
               working-directory: backend 
               run: go test -v ./internal/tests/...
             
-            #- name: Run tests and generate coverage
-            #  run: |
-            #      mkdir -p test-results
-            #      go test -v -coverprofile=test-results/coverage.out ./internal/tests/... | tee test-results/test.log
-            #  continue-on-error: true 
-#
-            #- name: Upload test logs and coverage
-            #  if: always() # run this even if tests fail
-            #  uses: actions/upload-artifact@v4
-            #  with:
-            #      name: go-test-results
-            #      path: test-results/
+            - name: Run tests and generate coverage
+              run: |
+                  mkdir -p test-results
+                  go test -v -coverprofile=test-results/coverage.out ./internal/tests/... | tee test-results/test.log
+              continue-on-error: true 
+
+            - name: Upload test logs and coverage
+              if: always() # run this even if tests fail
+              uses: actions/upload-artifact@v4
+              with:
+                  name: go-test-results
+                  path: test-results/
 
