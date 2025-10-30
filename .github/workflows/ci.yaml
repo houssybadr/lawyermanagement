@@ -13,10 +13,10 @@ jobs:
             testdb:
                 image: postgres:15
                 env:
-                    POSTGRES_USER: root
-                    POSTGRES_PASSWORD: root
-                    POSTGRES_DB: lawyer_management
-                    POSTGRES_PORT: 5432
+                    POSTGRES_USER: ${{secrets.TEST_DB_USER}}
+                    POSTGRES_PASSWORD: ${{secrets.TEST_DB_PASSWORD}}
+                    POSTGRES_DB: ${{secrets.TEST_DB_NAME}}
+                    POSTGRES_PORT: ${{secrets.TEST_DB_PORT}}
                 ports: 
                     - 5432:5432
                 options: >-
@@ -24,6 +24,7 @@ jobs:
                     --health-interval 5s
                     --health-timeout 5s
                     --health-retries 5
+        
         
         env:
             #jwt crypt key
@@ -37,11 +38,11 @@ jobs:
             DB_PASSWORD: ${{secrets.DB_PASSWORD}}
 
             # for test postgressdb
-            TEST_DB_HOST: testdb
-            TEST_DB_PORT: 5432
-            TEST_DB_USER: root
-            TEST_DB_NAME: lawyer_management
-            TEST_DB_PASSWORD: root
+            TEST_DB_HOST: ${{secrets.TEST_DB_HOST}}
+            TEST_DB_PORT: ${{secrets.TEST_DB_PORT}}
+            TEST_DB_USER: ${{secrets.TEST_DB_USER}}
+            TEST_DB_NAME: ${{secrets.TEST_DB_NAME}}
+            TEST_DB_PASSWORD: ${{secrets.TEST_DB_PASSWORD}}
 
             # for n8n automations:
             WEBHOOK_URL: ${{secrets.WEBHOOK_URL}}
@@ -57,28 +58,38 @@ jobs:
                 go-version: 1.25.1
                 cache-dependency-path: backend/go.sum
 
-            - name: setup go
-              working-directory: backend 
-              run: go mod download
-
             - name: Wait for Postgres to be ready
               run: |
-                echo "Waiting for Postgres..."
-                until pg_isready -h testdb -U root -d lawyer_management; do
-                  sleep 2
+                timeout=60
+                count=0
+                until pg_isready -h testdb -U ${{secrets.TEST_DB_USER}} -d ${{secrets.TEST_DB_NAME}}; do
+                sleep 2
+                count=$((count+2))
+                if [ $count -ge $timeout ]; then
+                    echo "Postgres did not start in time"
+                    exit 1
+                fi
                 done
 
+                
+            - name: download depends
+              working-directory: backend 
+              run: go mod download
               
             - name: run tests
               working-directory: backend 
               run: go test -v ./internal/tests/...
             
-            - name: Debug env vars
+            - name: Run tests and generate coverage
               run: |
-                  echo "TEST_DB_HOST: $TEST_DB_HOST"
-                  echo "TEST_DB_PORT: $TEST_DB_PORT"
-                  echo "TEST_DB_USER: $TEST_DB_USER"
-                  echo "TEST_DB_NAME: $TEST_DB_NAME"
-                  echo "TEST_DB_PASSWORD: $TEST_DB_PASSWORD"
+                  mkdir -p test-results
+                  go test -v -coverprofile=test-results/coverage.out ./internal/tests/... | tee test-results/test.log
+              continue-on-error: true 
 
+            - name: Upload test logs and coverage
+              if: always() # run this even if tests fail
+              uses: actions/upload-artifact@v4
+              with:
+                  name: go-test-results
+                  path: test-results/
 
