@@ -66,16 +66,12 @@ jobs:
               working-directory: backend 
               run: go test -v ./internal/tests/...
             
-            - name: Run tests and generate coverage
+            - name: Debug env vars
               run: |
-                  mkdir -p test-results
-                  go test -v -coverprofile=test-results/coverage.out ./internal/tests/... | tee test-results/test.log
-              continue-on-error: true 
+                  echo "TEST_DB_HOST: $TEST_DB_HOST"
+                  echo "TEST_DB_PORT: $TEST_DB_PORT"
+                  echo "TEST_DB_USER: $TEST_DB_USER"
+                  echo "TEST_DB_NAME: $TEST_DB_NAME"
+                  echo "TEST_DB_PASSWORD: $TEST_DB_PASSWORD"
 
-            - name: Upload test logs and coverage
-              if: always() # run this even if tests fail
-              uses: actions/upload-artifact@v4
-              with:
-                  name: go-test-results
-                  path: test-results/
 
