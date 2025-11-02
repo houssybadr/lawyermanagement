@@ -26,7 +26,7 @@ jobs:
               with:
                 context: ./backend
                 push: true
-                tags: ${{secrets.DOCKERHUB_USERNAME}}:lawyermanagement:latest
+                tags: ${{secrets.DOCKERHUB_USERNAME}}/lawyermanagement:latest
 
 
 
