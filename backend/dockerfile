@@ -12,5 +12,5 @@ RUN go build -o main ./cmd/api
 
 EXPOSE 4000
 
-CMD ["bash", "-c", "./main"]
+#CMD ["bash", "-c", "./main"]
 

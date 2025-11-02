@@ -30,8 +30,6 @@ jobs:
             #jwt crypt key
             JWT_SECRET: ${{secrets.JWT_SECRET}}
 
-
-
             # for test postgressdbk
             TEST_DB_HOST: ${{secrets.TEST_DB_HOST}}
             TEST_DB_PORT: ${{secrets.TEST_DB_PORT}}
