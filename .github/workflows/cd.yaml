@@ -38,8 +38,10 @@ jobs:
           password: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}
 
       - name: Build and Push to Artifact Registry
+        env:
+          GOOGLE_PROJECT: ${{ secrets.GOOGLE_PROJECT }}
         uses: docker/build-push-action@v5
         with:
           context: ./backend
           push: true
-          tags: europe-west1-docker.pkg.dev/${{ secrets.GOOGLE_PROJECT }}/lawyermanagement/lawyermanagementbackend:latest
+          tags: europe-west1-docker.pkg.dev/${{ env.GOOGLE_PROJECT }}/lawyermanagement/backend:latest
