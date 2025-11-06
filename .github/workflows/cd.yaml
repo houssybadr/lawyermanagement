@@ -30,16 +30,16 @@ jobs:
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/lawyermanagement:latest
 
       # --- Google Artifact Registry ---
-      - name: Authenticate to Google Cloud
-        uses: google-github-actions/auth@v2
+      - name: Login to Artifact Registry
+        uses: docker/login-action@v3
         with:
-          credentials_json: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}
-
-      - name: Configure Docker for Artifact Registry
-        run: |
-          gcloud auth configure-docker europe-west1-docker.pkg.dev
+          registry: europe-west1-docker.pkg.dev
+          username: _json_key
+          password: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}
 
       - name: Build and Push to Artifact Registry
-        run: |
-          docker build -t europe-west1-docker.pkg.dev/${{ secrets.GOOGLE_PROJECT }}/lawyermanagement/backend:latest ./backend
-          docker push europe-west1-docker.pkg.dev/${{ secrets.GOOGLE_PROJECT }}/lawyermanagement/backend:latest
+        uses: docker/build-push-action@v5
+        with:
+          context: ./backend
+          push: true
+          tags: europe-west1-docker.pkg.dev/${{ secrets.GOOGLE_PROJECT }}/lawyermanagement/backend:latest
